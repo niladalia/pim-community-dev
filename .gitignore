@@ -31,6 +31,7 @@ docker compose.override.yml
 package-lock.json
 .yarn-metadata.json
 yarn-error.log
+doing.txt
 coverage/*
 .phpunit.result.cache
 cypress/videos
