@@ -1,7 +1,7 @@
 ## DOING ##
 
 He fet fork del repositori per poder fer de branques i commits. En cuan el repositori estigui copiat, fer :
- DONE * Update de tot el repositori de docker-compose a docker compose
+ DONE * Update de tot el repositori de docker compose a docker compose
  DONE * Borrar tots els containers i volums de projecte original
  DONE * make pib-dev
 
