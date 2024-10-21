@@ -289,7 +289,7 @@
 
 ## Improvements
 
-- Use Node v14 in docker-compose files
+- Use Node v14 in docker compose files
 
 # 6.0.26 (2022-04-29)
 

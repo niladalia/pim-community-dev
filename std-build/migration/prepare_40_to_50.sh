@@ -24,7 +24,7 @@ cp $DEV_DISTRIB_DIR/std-build/Kernel.php $STANDARD_DISTRIB_DIR/src
 
 # Copy STD configuration
 # Uses same docker compose than the CE
-cp $DEV_DISTRIB_DIR/docker-compose.yml $STANDARD_DISTRIB_DIR/docker-compose.yml
+cp $DEV_DISTRIB_DIR/docker compose.yml $STANDARD_DISTRIB_DIR/docker compose.yml
 # Usable example Makefile
 cp $DEV_DISTRIB_DIR/std-build/Makefile $STANDARD_DISTRIB_DIR/Makefile
 

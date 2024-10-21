@@ -101,7 +101,7 @@ jobs:
             - install_yq_v3
             - run:
                   name: Remove MySQL port translation (see BH-664)
-                  command: yq delete --inplace docker-compose.yml services.mysql.ports
+                  command: yq delete --inplace docker compose.yml services.mysql.ports
             - run:
                   name: Persist default IMAGE_TAG to be the repo last commit SHA1
                   command: |
@@ -120,7 +120,7 @@ jobs:
             - install_yq_v3
             - run:
                   name: Remove MySQL port translation (see BH-664)
-                  command: yq delete --inplace docker-compose.yml services.mysql.ports
+                  command: yq delete --inplace docker compose.yml services.mysql.ports
             -   run:
                     name: Setup missing directories
                     command: mkdir -p var/tests/phpspec var/tests/csfixer var/logs var/tests/screenshots ~/.composer
@@ -143,8 +143,8 @@ jobs:
             - attach_workspace:
                   at: ~/
             - run:
-                  name: Copy docker-compose.override.yml.dist
-                  command: cp .circleci/docker-compose.override.yml.dist docker-compose.override.yml
+                  name: Copy docker compose.override.yml.dist
+                  command: cp .circleci/docker compose.override.yml.dist docker compose.override.yml
             - when:
                   condition: << parameters.is_ee_built >>
 

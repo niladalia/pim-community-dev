@@ -16,10 +16,10 @@ jobs:
                     command: sudo chown -R 1000:1000 ../project ~/.cache/yarn
             -   run:
                     name: Pull docker image for node
-                    command: docker-compose pull node
+                    command: docker compose pull node
             -   run:
                     name: Build other front libraries
-                    command: docker-compose run -u node --rm node yarn catalogs:build
+                    command: docker compose run -u node --rm node yarn catalogs:build
             -   run:
                     name: Lint front
                     command: make connectivity-connection-lint-front
@@ -56,10 +56,10 @@ jobs:
                     command: sudo chown -R 1000:1000 ../project ~/.cache/yarn
             -   run:
                     name: Pull docker image for node
-                    command: docker-compose pull node
+                    command: docker compose pull node
             -   run:
                     name: Build other front libraries
-                    command: docker-compose run -u node --rm node yarn catalogs:build
+                    command: docker compose run -u node --rm node yarn catalogs:build
             -   run:
                     name: Unit front
                     command: make connectivity-connection-unit-front
@@ -76,7 +76,7 @@ jobs:
                     command: sudo chown -R 1000:1000 ../project
             -   run:
                     name: Pull docker image for php
-                    command: docker-compose pull php
+                    command: docker compose pull php
             -   run:
                     name: Coupling back
                     command: make connectivity-connection-coupling-back
@@ -95,14 +95,14 @@ jobs:
             -   attach_workspace:
                     at: ~/
             -   run:
-                    name: Copy docker-compose.override.yml.dist
-                    command: cp .circleci/docker-compose.override.yml.dist docker-compose.override.yml
+                    name: Copy docker compose.override.yml.dist
+                    command: cp .circleci/docker compose.override.yml.dist docker compose.override.yml
             -   run:
                     name: Change owner on project dir (docker needs uid 1000, circleci can be another uid)
                     command: sudo chown -R 1000:1000 ../project
             -   run:
                     name: Pull docker images
-                    command: docker-compose pull php httpd mysql elasticsearch object-storage pubsub-emulator
+                    command: docker compose pull php httpd mysql elasticsearch object-storage pubsub-emulator
             -   run:
                     name: Start containers
                     command: |
@@ -125,14 +125,14 @@ jobs:
             -   attach_workspace:
                     at: ~/
             -   run:
-                    name: Copy docker-compose.override.yml.dist
-                    command: cp .circleci/docker-compose.override.yml.dist docker-compose.override.yml
+                    name: Copy docker compose.override.yml.dist
+                    command: cp .circleci/docker compose.override.yml.dist docker compose.override.yml
             -   run:
                     name: Change owner on project dir (docker needs uid 1000, circleci can be another uid)
                     command: sudo chown -R 1000:1000 ../project
             -   run:
                     name: Pull docker images
-                    command: docker-compose pull php httpd mysql elasticsearch object-storage pubsub-emulator
+                    command: docker compose pull php httpd mysql elasticsearch object-storage pubsub-emulator
             -   run:
                     name: Start containers
                     command: |
@@ -154,8 +154,8 @@ jobs:
             -   attach_workspace:
                     at: ~/
             -   run:
-                    name: Copy docker-compose.override.yml.dist
-                    command: cp .circleci/docker-compose.override.yml.dist docker-compose.override.yml
+                    name: Copy docker compose.override.yml.dist
+                    command: cp .circleci/docker compose.override.yml.dist docker compose.override.yml
             -   run:
                     name: Change owner on project dir in order to archive the project into the workspace
                     command: sudo chown -R 1000:1000 ../project
@@ -163,7 +163,7 @@ jobs:
                     name: Start containers
                     command: |
                         docker load -i php-pim-image.tar
-                        APP_ENV=behat docker-compose -f docker-compose.yml -f src/Akeneo/Connectivity/Connection/tests/docker-compose.yml up -d --remove-orphans httpd mysql elasticsearch httpd object-storage selenium pubsub-emulator
+                        APP_ENV=behat docker compose -f docker compose.yml -f src/Akeneo/Connectivity/Connection/tests/docker compose.yml up -d --remove-orphans httpd mysql elasticsearch httpd object-storage selenium pubsub-emulator
                         docker/wait_docker_up.sh
             -   run:
                     name: Install database
