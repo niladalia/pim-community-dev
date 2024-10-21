@@ -60,7 +60,7 @@ cp $DEV_DISTRIB_DIR/public/* $STANDARD_DISTRIB_DIR/public/
 cp $DEV_DISTRIB_DIR/std-build/bundles.php $STANDARD_DISTRIB_DIR/config
 
 # Uses same docker compose than the CE
-cp $DEV_DISTRIB_DIR/docker-compose.yml $STANDARD_DISTRIB_DIR/docker-compose.yml
+cp $DEV_DISTRIB_DIR/docker compose.yml $STANDARD_DISTRIB_DIR/docker compose.yml
 
 # Usable example Makefile
 cp $DEV_DISTRIB_DIR/std-build/Makefile $STANDARD_DISTRIB_DIR/Makefile

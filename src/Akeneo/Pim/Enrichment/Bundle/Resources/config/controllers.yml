@@ -10,15 +10,6 @@ services:
             - '@pim_catalog.repository.product'
             - '@pim_pdf_generator.renderer.registry'
 
-    pim_comment.controller.comment:
-        public: true
-        class: 'Akeneo\Pim\Enrichment\Bundle\Controller\InternalApi\CommentController'
-        arguments:
-            - '@security.token_storage'
-            - '@doctrine.orm.default_entity_manager'
-            - '@pim_comment.remover.comment'
-            - '%pim_comment.entity.comment.class%'
-
     pim_localization.controller.format:
         public: true
         class: 'Akeneo\Pim\Enrichment\Bundle\Controller\InternalApi\FormatController'
@@ -231,6 +222,7 @@ services:
             - '@pim_catalog.localization.presenter.datetime'
             - '@pim_enrich.resolver.locale'
             - '@pim_user.context.user'
+            - '@pim_comment.remover.comment'
 
     pim_enrich.controller.rest.product_model_category:
         public: true

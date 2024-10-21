@@ -9,6 +9,7 @@ use Akeneo\Pim\Enrichment\Component\Product\Model\ProductInterface;
 use Akeneo\Pim\Enrichment\Component\Product\Repository\ProductRepositoryInterface;
 use Akeneo\Platform\Bundle\UIBundle\Resolver\LocaleResolver;
 use Akeneo\Tool\Component\Localization\Presenter\PresenterInterface;
+use Akeneo\Tool\Component\StorageUtils\Remover\RemoverInterface;
 use Akeneo\Tool\Component\StorageUtils\Saver\SaverInterface;
 use Akeneo\UserManagement\Bundle\Context\UserContext;
 use Doctrine\Common\Util\ClassUtils;
@@ -23,6 +24,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Controller for product comments
@@ -45,6 +47,7 @@ class ProductCommentController
         private readonly PresenterInterface $datetimePresenter,
         private readonly LocaleResolver $localeResolver,
         private readonly UserContext $userContext,
+        private readonly RemoverInterface $commentRemover
     ) {
     }
 
@@ -161,6 +164,27 @@ class ProductCommentController
         }
 
         return new JsonResponse($errors, 400);
+    }
+
+    public function deleteAction(Request $request, $id)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            return new RedirectResponse('/');
+        }
+
+        $comment = $this->commentRepository->find($id);
+
+        if (null === $comment) {
+            throw new NotFoundHttpException(sprintf('Comment with id %s not found.', $id));
+        }
+
+        if ($comment->getAuthor() !== $this->getUser()) {
+            throw new AccessDeniedException('You are not allowed to delete this comment.');
+        }
+
+        $this->commentRemover->remove($comment);
+
+        return new JsonResponse();
     }
 
     /**

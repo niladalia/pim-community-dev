@@ -1,0 +1,56 @@
+## DOING ##
+
+He fet fork del repositori per poder fer de branques i commits. En cuan el repositori estigui copiat, fer :
+ DONE * Update de tot el repositori de docker-compose a docker compose
+ DONE * Borrar tots els containers i volums de projecte original
+ DONE * make pib-dev
+
+DONE : Crear una branch per al "refactor" del delete comment. per tal de no tenir un controlador innecesari.
+Fer les modificacions necesaries.
+
+- Després seguir amb investigació rutes - controllers.
+    * Tenir un esquema mental ( o físic ) sobre els serveis que intervenent en una petició API de creació
+        o llistament de Productes.
+    * Per a la creació d'alguna altra entitat.
+    * Començar amb les implementacions.
+
+
+##DOING##
+
+tests: ProductCreationEndToEnd
+Rutes principals productes API
+(
+rutas : internal_api/product.yml
+          * pim_enrich_product_rest_get
+controller : InternalApi/ProductController
+          *postAction
+)
+
+
+* Check the code
+    DONE  : - Revisar per sobre arquitectura carpetes
+    DOING : - Revisar flow de peticions, agafar petició "afegir producte" i després "llistar productes":
+        1) Buscar test unitaris
+        2) Rutes
+        3) Controladors
+        4) Serveis i entitats
+
+Possibles implementacions :
+
+    - EDITAR/CREAR PRODUCT : No deixar afegir un producte a més de 3 categories.
+
+    - CREATE PRODUCT : Comprobar máxim de productes asociats a una categoria, si hi han més de "X" productes en una categoria,
+      no deixar crear-lo.
+
+    - D'on treu la informació de 1000 products, 50 product models
+
+    - A quina taula es guarden els camps generats dinamicament com el que he creat de "country of origin".
+
+    - Conectar amb api Externa o amb events de forma que cada cop que es crei un producte
+      Es comuniqui via API amb un altre servidor que guardará el producte en BD
+
+    - Refactor Delete comment. NO hi ha cap motiu per tenir un controlador ProductCommentController
+      per a llistar, crear o contestar a un comentari, i despres un controlador CommentRepository, en una ruta diferent,
+      per solament borrar el comentari. Refactor i afegir el borrar comentari en el mateix controlador
+      que la resta de endpoints.
+
