@@ -2,6 +2,8 @@
 
 namespace Akeneo\Pim\Enrichment\Component\Product\Model;
 
+#use Akeneo\Category\Domain\Exception\ViolationsException;
+use Akeneo\Pim\Enrichment\Product\API\Command\Exception\ViolationsException;
 use Akeneo\Category\Infrastructure\Component\Classification\Model\CategoryInterface as BaseCategoryInterface;
 use Akeneo\Category\Infrastructure\Component\Model\CategoryInterface;
 use Akeneo\Pim\Enrichment\Component\Product\Model\QuantifiedAssociation\EntityWithQuantifiedAssociationTrait;
@@ -14,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Webmozart\Assert\Assert;
 
 /**
@@ -387,6 +390,12 @@ abstract class AbstractProduct implements ProductInterface
      */
     public function addCategory(BaseCategoryInterface $category)
     {
+        if($this->getCategories()->count() > 4 ) {
+            throw new ViolationsException(
+                ConstraintViolationList::createFromMessage("A product can only belong to a maximum of 5 categories. #{$this->getCategories()->count()}")
+            );
+        }
+
         if (!$this->categories->contains($category) && !$this->hasAncestryCategory($category)) {
             $this->categories->add($category);
             $this->dirty = true;
@@ -400,6 +409,7 @@ abstract class AbstractProduct implements ProductInterface
      */
     public function setCategories(Collection $categories): void
     {
+
         $formerCategories = $this->getCategories();
         $categoriesToAdd = $categories->filter(
             function (CategoryInterface $category) use ($formerCategories) {
