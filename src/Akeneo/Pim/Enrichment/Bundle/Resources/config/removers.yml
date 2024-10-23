@@ -70,3 +70,9 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
             - '%pim_comment.entity.comment.class%'
+
+    pim_comment.delete.comment:
+        class: 'Akeneo\Pim\Enrichment\Component\Comment\UseCase\Delete\DeleteComment'
+        arguments:
+            - '@pim_comment.remover.comment'
+            - '@pim_comment.finder.comment'

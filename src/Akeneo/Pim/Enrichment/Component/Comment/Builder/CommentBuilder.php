@@ -39,12 +39,13 @@ class CommentBuilder
     }
 
     /**
+     * @param string                  $body
      * @param CommentSubjectInterface $subject
      * @param UserInterface           $user
      *
      * @return CommentInterface
      */
-    public function buildComment(CommentSubjectInterface $subject, UserInterface $user)
+    public function buildComment(string $body, CommentSubjectInterface $subject, UserInterface $user, ?CommentInterface $parentComment = null)
     {
         $now = new \DateTime();
 
@@ -57,6 +58,12 @@ class CommentBuilder
         } else {
             $comment->setResourceId($subject->getId());
         }
+
+        if($parentComment !== null){
+            $comment->setParent($parentComment);
+        }
+
+        $comment->setBody($body);
         $comment->setAuthor($user);
         $comment->setCreatedAt($now);
         $comment->setRepliedAt($now);

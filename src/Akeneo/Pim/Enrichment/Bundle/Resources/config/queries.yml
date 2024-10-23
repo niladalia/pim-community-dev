@@ -480,3 +480,18 @@ services:
         class: 'Akeneo\Pim\Enrichment\Bundle\Storage\Sql\Product\SqlUpdateIdentifierValuesQuery'
         arguments:
             - '@database_connection'
+
+    pim_comment.finder.relation:
+        class: 'Akeneo\Pim\Enrichment\Component\Comment\UseCase\Find\CommentsFinderByEntityRelation'
+        arguments:
+            - '@pim_comment.repository.comment'
+
+    pim_comment.finder.comment:
+        class: 'Akeneo\Pim\Enrichment\Component\Comment\UseCase\Find\CommentFinder'
+        arguments:
+            - '@pim_comment.repository.comment'
+
+    pim_product.finder.relation:
+        class: 'Akeneo\Pim\Enrichment\Component\Product\UseCase\Find\ProductFinder'
+        arguments:
+            - '@pim_catalog.repository.product'

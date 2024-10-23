@@ -212,17 +212,13 @@ services:
         class: 'Akeneo\Pim\Enrichment\Bundle\Controller\InternalApi\ProductCommentController'
         arguments:
             - '@security.token_storage'
-            - '@form.factory'
-            - '@pim_catalog.repository.product'
-            - '@pim_comment.repository.comment'
-            - '@pim_comment.saver.comment'
-            - '@pim_comment.builder.comment'
             - '@pim_standard_format_serializer'
-            - '@validator'
             - '@pim_catalog.localization.presenter.datetime'
             - '@pim_enrich.resolver.locale'
             - '@pim_user.context.user'
-            - '@pim_comment.remover.comment'
+            - '@pim_comment.finder.relation'
+            - '@pim_comment.creator.relation'
+            - '@pim_comment.delete.comment'
 
     pim_enrich.controller.rest.product_model_category:
         public: true

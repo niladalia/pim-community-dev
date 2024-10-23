@@ -60,3 +60,11 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
             - '%pim_comment.entity.comment.class%'
+            -
+    pim_comment.creator.relation:
+        class: 'Akeneo\Pim\Enrichment\Component\Comment\UseCase\Create\CommentCreator'
+        arguments:
+            - '@pim_product.finder.relation'
+            - '@pim_comment.finder.comment'
+            - '@pim_comment.builder.comment'
+            - '@pim_comment.saver.comment'

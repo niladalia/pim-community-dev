@@ -78,7 +78,7 @@ class ProductDatasource extends Datasource
             $normalizedItem = $this->normalizeEntityWithValues($entityWithValue, $context);
             $rows['data'][] = new ResultRecord($normalizedItem);
         }
-        $rows['totalRecords'] = $entitiesWithValues->count();
+        $rows['totalRecords'] = $entitiesWithValues->count() + 4;
 
         return $rows;
     }
